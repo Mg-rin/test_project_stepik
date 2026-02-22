@@ -8,7 +8,7 @@ def pytest_addoption(parser):
         "--language",
         action="store",
         default="en",
-        help="Choose language: e.g. en, es, fr, ru"
+        help="Choose language: e.g. en, es, fr, ru, en-gb"
     )
 
 
@@ -21,5 +21,6 @@ def browser(request):
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
     browser = webdriver.Chrome(options=options)
 
+    browser.user_language = user_language
     yield browser
     browser.quit()
