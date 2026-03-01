@@ -16,7 +16,7 @@ class ProductPage(BasePage):
 
     def check_parameter(self):
         current_url_is = self.browser.current_url
-        assert Routes.PARAMETER in current_url_is, f"{current_url_is=}"
+        assert Routes.PARAMETER_PR_NEWYEAR or Routes.PARAMETER_PR_NEWYEAR_2019 in current_url_is, f"{current_url_is=}"
         print("Параметр в url есть")
 
 
