@@ -15,9 +15,12 @@ class ProductPage(BasePage):
 
 
     def check_parameter(self):
+
         current_url_is = self.browser.current_url
-        assert Routes.PARAMETER_PR_NEWYEAR or Routes.PARAMETER_PR_NEWYEAR_2019 in current_url_is, f"{current_url_is=}"
-        print("Параметр в url есть")
+        for parameter in Routes.PARAMETERS:
+            if parameter in current_url_is:
+                assert parameter in current_url_is, f"{current_url_is=}"
+        print(f"Параметр в url есть {self.browser.current_url}")
 
 
     def get_product_info(self):
@@ -35,13 +38,13 @@ class ProductPage(BasePage):
 
     def should_be_get_notification(self):
         self.notification = self.browser.find_element(*ProductPageLocators.CART_NOTIFICATION_H_PRODUCT).text
-        assert self.product in self.notification, \
+        assert self.product == self.notification, \
                 f"Название товара не совпадает. Ожидалось: {self.product}, Получено: {self.notification}"
-        print("Название в уведомление совпадает")
+        print(f"Название в уведомление совпадает. Ожидалось: {self.product}, Получено: {self.notification}")
 
 
     def should_be_get_total_card(self):
         self.notification_total = self.browser.find_element(*ProductPageLocators.CART_NOTIFICATION_TOTAL).text
         assert self.price in self.notification_total, \
                 f"Стоимость корзины не совпадает. Ожидалось: {self.price}, Получено: {self.notification_total}"
-        print("✓ Стоимость корзины совпадает с ценой товара")
+        print(f"✓ Стоимость корзины совпадает с ценой товара. Ожидалось: {self.price}, Получено: {self.notification_total}")
