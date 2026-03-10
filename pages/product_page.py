@@ -3,7 +3,6 @@ from pages.locators import ProductPageLocators
 from pages.routes import Routes
 
 
-
 class ProductPage(BasePage):
     def should_be_product_page(self):
         self.check_parameter()
@@ -15,7 +14,6 @@ class ProductPage(BasePage):
 
 
     def check_parameter(self):
-
         current_url_is = self.browser.current_url
         for parameter in Routes.PARAMETERS:
             if parameter in current_url_is:
@@ -48,3 +46,13 @@ class ProductPage(BasePage):
         assert self.price in self.notification_total, \
                 f"Стоимость корзины не совпадает. Ожидалось: {self.price}, Получено: {self.notification_total}"
         print(f"✓ Стоимость корзины совпадает с ценой товара. Ожидалось: {self.price}, Получено: {self.notification_total}")
+
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.CART_NOTIFICATION), \
+       "Success message is presented, but should not be"
+
+
+    def should_disappeared_success_message(self):
+        assert  self.is_disappeared(*ProductPageLocators.CART_NOTIFICATION), \
+       "Success message is presented, but should disappeared"

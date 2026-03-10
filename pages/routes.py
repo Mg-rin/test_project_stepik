@@ -1,7 +1,9 @@
+from enum import Enum
 
-class Routes:
+
+class Routes(str, Enum):
     MAIN_URL = 'http://selenium1py.pythonanywhere.com/'
-    LOGIN_URL = '{}/accounts/login/'
+    LOGIN_URL = 'http://selenium1py.pythonanywhere.com/accounts/login/'
     CATALOG = 'http://selenium1py.pythonanywhere.com/catalogue/'
     CATALOG_PRODUCT = 'http://selenium1py.pythonanywhere.com/catalogue/{}'
 
@@ -24,3 +26,7 @@ class Routes:
         '?promo=offer8',
         '?promo=offer9'
     ]
+
+    def __str__(self) -> str:
+        return self.value
+
